@@ -3,7 +3,7 @@ Project 1: Web Analytics
 
 ###Heroku URL
 
-Please put it here: http://sampleapp.herokuapp.com
+Please put it here: http://arcane-eyrie-9425.herokuapp.com
 
 ###Notes
 
