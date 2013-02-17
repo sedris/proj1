@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+	<th>ID</th>
     <th>Name</th>
     <th>Visits</th>
     <th></th>
@@ -11,9 +12,11 @@
 
 <% @sites.each do |site| %>
   <tr>
+	<td><%= site.id %></td>
     <td><%= site.name %></td>
     <td><%= site.visits %></td>
-    <td><%= link_to 'Show', site %></td>
+	<td><%= link_to 'Visit', visits_path(site) %></td>
+    <!--<td><%= link_to 'Show', site %></td>-->
     <td><%= link_to 'Edit', edit_site_path(site) %></td>
     <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

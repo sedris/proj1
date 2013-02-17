@@ -25,13 +25,20 @@ class SitesController < ApplicationController
   # GET /sites/new.json
   def new
     @site = Site.new
-
+	
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @site }
     end
   end
 
+  # GET /sites/1/visits
+  def visits
+    @site = Site.find(params[:id])
+	@site.visits = @site.visits + 1
+	@site.save
+  end
+  
   # GET /sites/1/edit
   def edit
     @site = Site.find(params[:id])
@@ -41,7 +48,8 @@ class SitesController < ApplicationController
   # POST /sites.json
   def create
     @site = Site.new(params[:site])
-
+	@site.visits = 0
+	
     respond_to do |format|
       if @site.save
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
