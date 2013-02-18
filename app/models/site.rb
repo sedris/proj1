@@ -1,3 +1,3 @@
 class Site < ActiveRecord::Base
-  attr_accessible :name, :visits
+  attr_accessible :visits
 end

@@ -34,9 +34,16 @@ class SitesController < ApplicationController
 
   # GET /sites/1/visits
   def visits
-    @site = Site.find(params[:id])
-	@site.visits = @site.visits + 1
-	@site.save
+    @site = Site.find_by_id(params[:id])
+	if @site
+		@site.visits = @site.visits + 1
+		@site.save
+	else
+		@site = Site.new
+		@site.id = params[:id]
+		@site.visits = 1
+		@site.save
+	end
   end
   
   # GET /sites/1/edit
