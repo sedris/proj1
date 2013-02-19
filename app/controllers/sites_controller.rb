@@ -33,6 +33,8 @@ class SitesController < ApplicationController
   end
 
   # GET /sites/1/visits
+  # Add 1 to found site's visits, or create a site 
+  # with given id and 1 visit if no site is found.
   def visits
     @site = Site.find_by_id(params[:id])
 	if @site
@@ -55,6 +57,7 @@ class SitesController < ApplicationController
   # POST /sites.json
   def create
     @site = Site.new(params[:site])
+	# make visits start at 0
 	@site.visits = 0
 	
     respond_to do |format|
