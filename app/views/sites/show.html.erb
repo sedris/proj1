@@ -64,7 +64,7 @@ window.onbeforeunload = function() {
   var url = location.href;
   var base_url = location.hostname;
 
-  xhr.open('POST', 'http://localhost:3000/sites/<%= @site.id %>/visits', false);
+  xhr.open('POST', 'http://arcane-eyrie-9425.herokuapp.com/sites/<%= @site.id %>/visits', false);
   var params = "url=" + url + "&base_url=" + base_url + "&duration=" + duration;
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(params);
