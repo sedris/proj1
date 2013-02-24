@@ -10,10 +10,26 @@
   <%= @site.base_url %>
 </p>
 
-<%= @visits%>
+<b>All Visits</b><br>
+<table>
+  <tr>
+    <th>URL</th>
+    <th>Duration</th>
+  </tr>
+
+<% @allVisits.each do |visit| %>
+  <tr>
+    <td><%= visit.url %></td>
+    <td><%= visit.duration %></td>
+  </tr>
+<% end %>
+</table>
+
 <br>
-<%= @avg_durations%>
+visits hash: <%= @visits%>
 <br>
+avg_durations hash<%= @avg_durations%>
+<br><br>
 <table>
   <tr>
     <th>URL</th>

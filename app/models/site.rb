@@ -25,8 +25,8 @@ class Site < ActiveRecord::Base
    			hash[visit.url] = hash[visit.url] + visit.duration
    		end
    	end
-   	self.visits do |visit|
-   		hash[visit.url] = hash[visit.url] / self.visits.where(:site_id => self.id).count
+   	hash.each do |key, value|
+   		hash[key] = value / self.visits.where(:url => key).count
    	end
  	  return hash
   end

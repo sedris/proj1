@@ -12,8 +12,10 @@ class SitesController < ApplicationController
 
   # GET /sites/1
   # GET /sites/1.json
+  # Shows visit and visit duration information for this site
   def show
     @site = Site.find(params[:id])
+    @allVisits = @site.visits.all
     @visits = @site.calculate_visits
     @avg_durations = @site.calculate_avg_duration
 
