@@ -1,4 +1,17 @@
 class VisitsController < ApplicationController
+
+  def set_cors_headers
+    headers["Access-Control-Allow-Origin"] = "*"
+    headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
+    headers["Access-Control-Allow-Headers"] = "Content-Type, Origin, Referer, User-Agent"
+    headers["Access-Control-Max-Age"] = "3600"
+  end
+
+  def resource
+    set_cors_headers
+    render :text => "OK here is your restricted resource!"
+  end
+
   # GET /visits
   # GET /visits.json
   def index
@@ -43,9 +56,14 @@ class VisitsController < ApplicationController
 
   # POST /visits
   # POST /visits.json
+  # Creates a visit by looking at url and duration parameters
+  # requires: base_url must match site.base_url for visit to register
   def create
+    set_cors_headers
     @site = Site.find(params[:site_id])
-    @visit = @site.visits.create(params[:visit])
+    if params[:base_url] == @site.base_url
+      @visit = @site.visits.create(:url => params[:url], :duration => params[:duration])
+    end
 
     respond_to do |format|
       if @visit.save

@@ -10,10 +10,11 @@
   <%= @site.base_url %>
 </p>
 
-<p>
-	<b>Visits:</b>
-	<%= @site.visits %>
-</p>
+<%= Hash["a"=>100] %>
+<br>
+<%= @visits%>
+<br>
+<%= @avg_durations%>
 
 <%= link_to 'Edit', edit_site_path(@site) %> |
 <%= link_to 'Back', sites_path %>
