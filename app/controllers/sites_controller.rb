@@ -3,7 +3,8 @@ class SitesController < ApplicationController
   # GET /sites.json
   def index
     @sites = Site.all
-
+    @visits = Visit.all
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @sites }

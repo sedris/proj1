@@ -1,7 +1,7 @@
 class Site < ActiveRecord::Base
   attr_accessible :base_url, :name
-  has_many :visits
-
+  has_many :visits, :dependent => :destroy
+  
   # returns the hash {url: integer} of visit counts
   def calculate_visits
   	visits = Hash[]

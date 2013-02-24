@@ -2,6 +2,24 @@
 
 <table>
   <tr>
+    <th>Visit id</th>
+    <th>Site id</th>
+    <th>URL</th>
+    <th>Duration</th>
+  </tr>
+
+<% @visits.each do |visit| %>
+  <tr>
+    <td><%= visit.id %></td>
+    <td><%= visit.site_id %></td>
+    <td><%= visit.url%></td>
+    <td><%= visit.duration %></td>
+  </tr>
+<% end %>
+</table>
+
+<table>
+  <tr>
     <th>Name</th>
     <th>Base url</th>
     <th></th>
@@ -9,7 +27,6 @@
     <th></th>
   </tr>
 
-<%= @sites %>
 <% @sites.each do |site| %>
   <tr>
     <td><%= site.name %></td>

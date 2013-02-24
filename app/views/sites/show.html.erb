@@ -25,11 +25,6 @@
 <% end %>
 </table>
 
-<br>
-visits hash: <%= @visits%>
-<br>
-avg_durations hash<%= @avg_durations%>
-<br><br>
 <table>
   <tr>
     <th>URL</th>
@@ -46,5 +41,34 @@ avg_durations hash<%= @avg_durations%>
 <% end %>
 </table>
 
+<br>
+<b>Copy this javascript into a site to track it: </b>
+<br> * Note: Must be in a site under the same base url to properly track
+<br>
+<pre>
+var xhr = new XMLHttpRequest();
+
+// We can ignore state change events if we're only interested in sending a request
+// (and don't have any error handling mechanisms in place)
+// xhr.onreadystatechange = function() {
+// }
+
+var start = null;
+var duration = 0;
+window.onload = function() {
+  start = new Date();
+}
+
+window.onbeforeunload = function() {
+  duration = (new Date() - start)/1000;
+  var url = location.href;
+  var base_url = location.hostname;
+
+  xhr.open('POST', 'http://localhost:3000/sites/<%= @site.id %>/visits', false);
+  var params = "url=" + url + "&base_url=" + base_url + "&duration=" + duration;
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(params);
+}
+</pre> <br>
 <%= link_to 'Edit', edit_site_path(@site) %> |
 <%= link_to 'Back', sites_path %>
