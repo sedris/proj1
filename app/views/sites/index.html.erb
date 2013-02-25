@@ -1,28 +1,9 @@
 <h1>Listing sites</h1>
-
-<table>
-  <tr>
-    <th>Visit id</th>
-    <th>Site id</th>
-    <th>URL</th>
-    <th>Duration</th>
-  </tr>
-
-<% @visits.each do |visit| %>
-  <tr>
-    <td><%= visit.id %></td>
-    <td><%= visit.site_id %></td>
-    <td><%= visit.url%></td>
-    <td><%= visit.duration %></td>
-  </tr>
-<% end %>
-</table>
-
+Currently tracked sites. Click 'show' to view info on webpages.
 <table>
   <tr>
     <th>Name</th>
     <th>Base url</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -32,7 +13,6 @@
     <td><%= site.name %></td>
     <td><%= site.base_url %></td>
     <td><%= link_to 'Show', site %></td>
-    <td><%= link_to 'Edit', edit_site_path(site) %></td>
     <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>

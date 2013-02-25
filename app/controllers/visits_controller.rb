@@ -1,5 +1,6 @@
 class VisitsController < ApplicationController
 
+  # Sets the CORS headers
   def set_cors_headers
     headers["Access-Control-Allow-Origin"] = "*"
     headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
@@ -7,6 +8,7 @@ class VisitsController < ApplicationController
     headers["Access-Control-Max-Age"] = "3600"
   end
 
+  # Sends a restricted resource
   def resource
     set_cors_headers
     render :text => "OK here is your restricted resource!"
@@ -58,6 +60,7 @@ class VisitsController < ApplicationController
   # POST /visits.json
   # Creates a visit by looking at url and duration parameters
   # requires: base_url must match site.base_url for visit to register
+  # otherwise the visit is not created
   def create
     set_cors_headers
     @site = Site.find(params[:site_id])

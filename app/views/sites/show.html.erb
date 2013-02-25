@@ -10,21 +10,7 @@
   <%= @site.base_url %>
 </p>
 
-<b>All Visits</b><br>
-<table>
-  <tr>
-    <th>URL</th>
-    <th>Duration</th>
-  </tr>
-
-<% @allVisits.each do |visit| %>
-  <tr>
-    <td><%= visit.url %></td>
-    <td><%= visit.duration %></td>
-  </tr>
-<% end %>
-</table>
-
+<b>Calculated Visit Info:</b>
 <table>
   <tr>
     <th>URL</th>
@@ -37,6 +23,22 @@
     <td><%= key %></td>
     <td><%= value %></td>
     <td><%= @avg_durations[key] %></td>
+  </tr>
+<% end %>
+</table>
+<br>
+
+<b>All Visits:</b><br>
+<table>
+  <tr>
+    <th>URL</th>
+    <th>Duration</th>
+  </tr>
+
+<% @allVisits.each do |visit| %>
+  <tr>
+    <td><%= visit.url %></td>
+    <td><%= visit.duration %></td>
   </tr>
 <% end %>
 </table>
@@ -53,14 +55,15 @@ var xhr = new XMLHttpRequest();
 // xhr.onreadystatechange = function() {
 // }
 
-var start = null;
+var start;
 var duration = 0;
 window.onload = function() {
   start = new Date();
 }
 
 window.onbeforeunload = function() {
-  duration = (new Date() - start)/1000;
+  var end = new Date();
+  duration = (end.getTime() - start.getTime())/1000;
   var url = location.href;
   var base_url = location.hostname;
 
@@ -70,5 +73,5 @@ window.onbeforeunload = function() {
   xhr.send(params);
 }
 </pre> <br>
-<%= link_to 'Edit', edit_site_path(@site) %> |
+
 <%= link_to 'Back', sites_path %>
