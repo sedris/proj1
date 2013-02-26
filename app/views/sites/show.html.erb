@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @site.name %>
+</p>
+
+<p>
+  <b>Base url:</b>
+  <%= @site.base_url %>
+</p>
+
+<b>Calculated Visit Info:</b>
+<table>
+  <tr>
+    <th>URL</th>
+    <th>Visits</th>
+    <th>Avg Duration</th>
+  </tr>
+
+<% @visits.each do |key, value| %>
+  <tr>
+    <td><%= key %></td>
+    <td><%= value %></td>
+    <td><%= @avg_durations[key] %></td>
+  </tr>
+<% end %>
+</table>
+<br>
+
+<b>All Visits:</b><br>
+<table>
+  <tr>
+    <th>URL</th>
+    <th>Duration</th>
+  </tr>
+
+<% @allVisits.each do |visit| %>
+  <tr>
+    <td><%= visit.url %></td>
+    <td><%= visit.duration %></td>
+  </tr>
+<% end %>
+</table>
+
+<br>
+<b>Copy this javascript into a site to track it: </b>
+<br> * Note: Must be in a site under the same base url to properly track
+<br>
+<pre>
+var xhr = new XMLHttpRequest();
+
+// We can ignore state change events if we're only interested in sending a request
+// (and don't have any error handling mechanisms in place)
+// xhr.onreadystatechange = function() {
+// }
+
+var start;
+var duration = 0;
+window.onload = function() {
+  start = new Date();
+}
+
+window.onbeforeunload = function() {
+  var end = new Date();
+  duration = (end.getTime() - start.getTime())/1000;
+  var url = location.href;
+  var base_url = location.hostname;
+
+  xhr.open('POST', 'http://arcane-eyrie-9425.herokuapp.com/sites/<%= @site.id %>/visits', false);
+  var params = "url=" + url + "&base_url=" + base_url + "&duration=" + duration;
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(params);
+}
+</pre> <br>
+
+<%= link_to 'Back', sites_path %>
